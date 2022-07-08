@@ -1,12 +1,14 @@
 package main
 
 import (
-	"goweb/framework"
+	"github.com/genganpeng/goweb/framework/gin"
 	"time"
 )
 
-func UserLoginController(c *framework.Context) error {
-	time.Sleep(5 * time.Second)
-	c.JsonAndCode(200, "ok, UserLoginController")
-	return nil
+func UserLoginController(c *gin.Context) {
+	foo, _ := c.DefaultQueryString("foo", "def")
+	// 等待10s才结束执行
+	time.Sleep(10 * time.Second)
+	// 输出结果
+	c.ISetOkStatus().IJson("ok, UserLoginController: " + foo)
 }
